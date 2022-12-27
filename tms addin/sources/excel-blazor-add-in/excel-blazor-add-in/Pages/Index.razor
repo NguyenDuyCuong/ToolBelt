@@ -13,18 +13,4 @@
 	<div class="col-md-6">
 		<button type="button" class="btn btn-primary" @onclick="HelloButton">Hello world!</button>
 	</div>
-
-	<p role="status">Current count: @currentUser</p>
-	<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 </div>
-
-@code {
-	private string currentUser = "";
-
-
-
-	private async Task IncrementCount()
-	{
-		currentUser = await JSModule.InvokeAsync<string>("userButton");
-	}
-}
