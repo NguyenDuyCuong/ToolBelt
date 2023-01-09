@@ -1,0 +1,86 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">RapidBlazor</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <a class="nav-link" @onclick="@(() => MoveToPage("/"))">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </a>
+        </div>
+        <FlexibleAuthorizeView Permissions="@Permissions.Counter">
+        <div class="nav-item px-3">
+            <a class="nav-link" @onclick="@(() => MoveToPage("counter"))">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </a>
+        </div>
+        </FlexibleAuthorizeView>
+        <FlexibleAuthorizeView Permissions="@Permissions.Forecast">
+        <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("fetchdata"))">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                </a>
+        </div>
+        </FlexibleAuthorizeView>
+        <AuthorizeView>
+            <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("claims"))">
+                    <span class="oi oi-document" aria-hidden="true"></span> Claims
+                </a>
+            </div>
+        </AuthorizeView>
+        <FlexibleAuthorizeView Permissions="@Permissions.Todo">
+            <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("todo"))">
+                    <span class="oi oi-list" aria-hidden="true"></span> Todo
+                </a>
+            </div>
+        </FlexibleAuthorizeView>
+        <FlexibleAuthorizeView Permissions="@(Permissions.ViewUsers | Permissions.ManageUsers)">
+            <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("admin/users"))">
+                    <span class="oi oi-people" aria-hidden="true"></span> Users
+                </a>
+            </div>
+        </FlexibleAuthorizeView>
+        <FlexibleAuthorizeView Permissions="@(Permissions.ViewRoles | Permissions.ManageRoles)">
+            <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("admin/roles"))">
+                    <span class="oi oi-badge" aria-hidden="true"></span> Roles
+                </a>
+            </div>
+        </FlexibleAuthorizeView>
+        <FlexibleAuthorizeView Permissions="@(Permissions.ViewAccessControl | Permissions.ConfigureAccessControl)">
+            <div class="nav-item px-3">
+                <a class="nav-link" @onclick="@(() => MoveToPage("admin/access-control"))">
+                    <span class="oi oi-lock-locked" aria-hidden="true"></span> Access Control
+                </a>
+            </div>
+        </FlexibleAuthorizeView>
+    </nav>
+</div>
+
+@code {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    void MoveToPage(string page)
+    {
+        NavigationManager.NavigateTo(page);
+    }
+}

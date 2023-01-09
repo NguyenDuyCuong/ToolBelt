@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <a @onclick="@(() => MoveToPage("authentication/profile"))">Hello, @context.User.Identity?.Name!</a>
+        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
+    </Authorized>
+    <NotAuthorized>
+        <a @onclick="@(() => MoveToPage("authentication/register"))">Register</a>
+        <a @onclick="@(() => NavigationManager.NavigateToLogin("authentication/login"))" @onclick:preventDefault>Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = default!;
+
+    void MoveToPage(string page)
+    {
+        NavigationManager.NavigateTo(page);
+    }
+}

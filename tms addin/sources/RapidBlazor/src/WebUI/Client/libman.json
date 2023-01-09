@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "html5-history-api@4.2.10",
+      "destination": "wwwroot/lib/html5-history-api/"
+    }
+  ]
+}
