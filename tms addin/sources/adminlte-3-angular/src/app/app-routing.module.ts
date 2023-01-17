@@ -13,6 +13,7 @@ import {RecoverPasswordComponent} from '@modules/recover-password/recover-passwo
 import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
 
 const routes: Routes = [
+    { path: '', redirectTo: 'reports/working-time', pathMatch: 'full' },
     {
         path: '',
         component: MainComponent,

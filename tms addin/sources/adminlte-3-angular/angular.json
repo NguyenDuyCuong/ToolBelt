@@ -28,9 +28,12 @@
                         ],
                         "styles": [
                             "src/styles.scss",
-                            "node_modules/ngx-toastr/toastr.css"
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/admin-lte/plugins/ion-rangeslider/css/ion.rangeSlider.min.css"
                         ],
-                        "scripts": [],
+                        "scripts": [
+                            "node_modules/admin-lte/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"
+                        ],
                         "vendorChunk": true,
                         "extractLicenses": false,
                         "buildOptimizer": false,
