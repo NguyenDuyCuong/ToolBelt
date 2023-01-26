@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { WorkingTimeComponent } from './working-time/working-time.component';
 import { LayoutComponent } from './layout/layout.component';
-import { TimeCardComponent } from "../../components/time-card/time-card.component";
+import { TimeLineComponent } from "../../components/time-line/time-line.component";
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { TimeCardComponent } from "../../components/time-card/time-card.componen
     imports: [
         CommonModule,
         ReportsRoutingModule,
-        TimeCardComponent
+        TimeLineComponent
     ]
 })
 export class ReportsModule { }

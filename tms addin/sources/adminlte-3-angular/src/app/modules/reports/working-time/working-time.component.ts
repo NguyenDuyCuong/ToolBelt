@@ -1,13 +1,9 @@
-import { Component, OnInit  } from '@angular/core';
-declare const $: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-working-time',
   templateUrl: './working-time.component.html',
   styleUrls: ['./working-time.component.scss']
 })
-export class WorkingTimeComponent implements OnInit  {
-  ngOnInit(): void {
-    $(".js-range-slider").ionRangeSlider();
-  }
+export class WorkingTimeComponent {
 }
