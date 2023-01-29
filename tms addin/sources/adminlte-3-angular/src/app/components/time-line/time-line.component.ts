@@ -15,7 +15,7 @@ export class TimeLineComponent implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
-    $(this.el.nativeElement).find('.js-range-slider').ionRangeSlider();
+    
   }
 
 }

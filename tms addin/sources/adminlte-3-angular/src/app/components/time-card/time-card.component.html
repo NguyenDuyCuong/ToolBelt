@@ -1,26 +1,20 @@
-<div>
-    <!-- Before each timeline item corresponds to one icon on the left scale -->
-    <i class="fas fa-clock bg-red"></i>
-    <!-- Timeline item -->
-    <div class="timeline-item">
-        <!-- Time -->
-        <span class="time"><i class="fas fa-clock"></i> 23 Jan 2023</span>
-        <div class="timeline-header">
-            <a href="#" class="text-primary"><i class="fas fa-plus text-primary"></i></a>
-        </div>
-        <div class="info-box">
-            <div class="info-box-content">
-                <input type="text" class="js-range-slider" name="my_range" value=""
-                    data-type="double"
-                    data-min="0"
-                    data-max="1000"
-                    data-from="200"
-                    data-to="500"
-                    data-grid="true"
-                    data-from-fixed="true"
-                    data-to-fixed="true"
-                />
+<ng-template #template>
+    <div>
+        <!-- Before each timeline item corresponds to one icon on the left scale -->
+        <i class="fas fa-clock bg-red"></i>
+        <!-- Timeline item -->
+        <div class="timeline-item">
+            <!-- Time -->
+            <span class="time"><i class="fas fa-clock"></i> 23 Jan 2023</span>
+            <div class="timeline-header">
+                <a href="#" class="text-primary"><i class="fas fa-plus text-primary"></i></a>
+            </div>
+            <div class="info-box">
+                <div class="info-box-content">
+                    <input type="text" class="js-range-slider" name="my_range" value="" />
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+</ng-template>
