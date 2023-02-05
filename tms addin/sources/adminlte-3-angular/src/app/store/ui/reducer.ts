@@ -36,6 +36,11 @@ export function uiReducer(state: UiState = initialState, action: UiAction) {
                 sidebarSkin: skin,
                 darkMode: !state.darkMode
             };
+        case Actions.TOGGLE_WORKING_CALENDAR_MODE:
+            return {
+                ...state,
+                workingTimeCalendar: !state.workingTimeCalendar
+            };
         case Actions.SET_NAVBAR_VARIANT:
             let navbarVariant: string;
             if (state.darkMode) {

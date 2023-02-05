@@ -20,10 +20,18 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <!-- Main node for this component -->
-            <app-time-line></app-time-line>
+            <div class="col-sm-12" *ngIf="!workingTimeCalendar else calendar">
+                <app-time-line></app-time-line>
+            </div>
         </div>
         <!-- /.row -->
     </div>
     <!-- Main row -->
 </section>
 <!-- /.content -->
+
+<ng-template #calendar>
+    <div class="col-sm-12">
+        <app-time-calendar></app-time-calendar>
+    </div>
+</ng-template>

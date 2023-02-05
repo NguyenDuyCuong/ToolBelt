@@ -5,6 +5,7 @@ import { ReportsRoutingModule } from './reports-routing.module';
 import { WorkingTimeComponent } from './working-time/working-time.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TimeLineComponent } from "../../components/time-line/time-line.component";
+import { TimeCalendarComponent } from "../../components/time-calendar/time-calendar.component";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { TimeLineComponent } from "../../components/time-line/time-line.componen
     imports: [
         CommonModule,
         ReportsRoutingModule,
-        TimeLineComponent
+        TimeLineComponent,
+        TimeCalendarComponent
     ]
 })
 export class ReportsModule { }

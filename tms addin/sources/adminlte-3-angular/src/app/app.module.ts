@@ -37,6 +37,7 @@ import {defineCustomElements} from '@profabric/web-components/loader';
 import {SidebarSearchComponent} from './components/sidebar-search/sidebar-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
 defineCustomElements();
 registerLocaleData(localeEn, 'en-EN');
 

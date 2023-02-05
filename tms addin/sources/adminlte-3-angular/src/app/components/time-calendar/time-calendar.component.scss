@@ -1,0 +1,18 @@
+#txtSearch {
+	width: 0;
+    padding: 0;
+    border-width: 0;
+	transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+}
+#txtSearch:focus{
+    width: 151px;
+    padding: 4px 8px;
+    border-width: 1px;
+    transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+}

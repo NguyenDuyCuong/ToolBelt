@@ -1,8 +1,11 @@
-<h5>Customize AdminLTE</h5>
+<h5>Customize TMS Addin</h5>
 <hr class="mb-2" />
 <div style="padding: 8px 0">
     <pf-checkbox (change)="handleDarkModeChange($event)">
         Dark mode
+    </pf-checkbox>
+    <pf-checkbox [checked]="workingTimeCalendar" (change)="handleWorkingTimeCalendarModeChange($event)">
+        Working Time As Calendar
     </pf-checkbox>
     <pf-select
         class="mt-3"

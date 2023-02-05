@@ -1,0 +1,27 @@
+<div class="card bg-light border-light">
+    <div class="card-header">
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button type="button" class="btn btn-link">Jan 2023</button>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" id="txtSearch" placeholder="Input group example"
+                    aria-label="Input group example" aria-describedby="btnGroupAddon2">
+                <div class="input-group-append">
+                    <label role="button" class="input-group-text" id="btnGroupAddon2" for="txtSearch">
+                        <i class="fas fa-search"></i>
+                    </label>
+                </div>
+            </div>                    
+        </div>
+    </div>
+    <div class="card-body">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+</div>

@@ -2,7 +2,8 @@ import {AppState} from '@/store/state';
 import {
     SetNavbarVariant,
     SetSidebarSkin,
-    ToggleDarkMode
+    ToggleDarkMode,
+    ToggleWorkingCalendarMode
 } from '@/store/ui/actions';
 import {UiState} from '@/store/ui/state';
 import {
@@ -32,6 +33,7 @@ export class ControlSidebarComponent implements OnInit {
     public navbarVariant: string;
     public darkMode: boolean;
     public sidebarSkin: string;
+    public workingTimeCalendar: boolean;
 
     constructor(private store: Store<AppState>) {}
 
@@ -41,12 +43,18 @@ export class ControlSidebarComponent implements OnInit {
             this.navbarVariant = state.navbarVariant;
             this.darkMode = state.darkMode;
             this.sidebarSkin = state.sidebarSkin;
+            this.workingTimeCalendar = state.workingTimeCalendar ;
         });
     }
 
     public handleDarkModeChange(event: any) {
         console.log('value', event.target.checked);
         this.store.dispatch(new ToggleDarkMode());
+    }
+
+    public handleWorkingTimeCalendarModeChange(event: any) {
+        console.log('value', event.target.checked);
+        this.store.dispatch(new ToggleWorkingCalendarMode());
     }
 
     public onNavbarVariantChange(event: any) {

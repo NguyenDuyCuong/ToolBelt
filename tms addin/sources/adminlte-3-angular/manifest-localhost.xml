@@ -40,7 +40,8 @@
     <Host Name="Workbook" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://localhost:4200/index.html" />
+    <SourceLocation DefaultValue="https://localhost:4200" />
+    <RequestedWidth>600</RequestedWidth>
   </DefaultSettings>
   <!-- End TaskPane Mode integration.  -->
 
@@ -141,6 +142,17 @@
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
       </bt:LongStrings>
     </Resources>
+
+    <WebApplicationInfo>
+      <Id>975b4291-2fba-470f-b15b-15a232ed2589</Id>
+      <Resource>api://localhost:4200/975b4291-2fba-470f-b15b-15a232ed2589</Resource>
+      <Scopes>
+          <Scope>openid</Scope>
+          <Scope>user.read</Scope>
+          <Scope>files.read</Scope>
+          <Scope>profile</Scope>
+      </Scopes>
+    </WebApplicationInfo>
   </VersionOverrides>
   <!-- End Add-in Commands Mode integration. -->
 

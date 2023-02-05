@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
+
 declare const Excel: any;
+declare const Office: any;
 
 @Component({
     selector: 'app-blank',
@@ -13,5 +15,16 @@ export class BlankComponent {
           range.format.fill.color = 'green';
           await context.sync();
         });
+    }
+
+    async getIDToken() {
+        try {
+          let userTokenEncoded = await Office.auth.getAccessToken({
+            allowSignInPrompt: true,
+          });
+          console.log(userTokenEncoded);
+        } catch (error) {
+          console.log(error);
+        }
     }
 }

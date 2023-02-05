@@ -2,8 +2,9 @@ export default <UiState>{
     darkMode: false,
     navbarVariant: 'navbar-light',
     sidebarSkin: 'sidebar-dark-primary',
-    menuSidebarCollapsed: false,
-    controlSidebarCollapsed: true
+    menuSidebarCollapsed: true,
+    controlSidebarCollapsed: true,
+    workingTimeCalendar: true
     // screenSize: calculateWindowSize(window.innerWidth)
 };
 
@@ -14,4 +15,5 @@ export interface UiState {
     navbarVariant: string;
     sidebarSkin: string;
     screenSize: any;
+    workingTimeCalendar: boolean;
 }
