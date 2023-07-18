@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { WorkingTimeResolver } from './services/working-time.resolver';
 import { WorkingTimeComponent } from './working-time/working-time.component';
 
 const routes: Routes = [
   {
+    path: 'working-time',        
+    component: WorkingTimeComponent,
+    resolve: {
+      workingTimes: WorkingTimeResolver
+    }
+  },
+  {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: 'working-time',        
-        component: WorkingTimeComponent,
-      },
-      {
-        path: '',
-        component: WorkingTimeComponent
-      }
-    ]
+    component: WorkingTimeComponent
   }
 ];
 

@@ -36,6 +36,12 @@ import {ProfabricComponentsModule} from '@profabric/angular-components';
 import {defineCustomElements} from '@profabric/web-components/loader';
 import {SidebarSearchComponent} from './components/sidebar-search/sidebar-search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { environment } from 'environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { metaReducers, reducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 defineCustomElements();
@@ -66,19 +72,34 @@ registerLocaleData(localeEn, 'en-EN');
         SidebarSearchComponent
     ],
     imports: [
-        BrowserModule,
-        StoreModule.forRoot({auth: authReducer, ui: uiReducer}),
+        BrowserModule,        
         HttpClientModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule,
+        BrowserAnimationsModule, 
         ToastrModule.forRoot({
             timeOut: 3000,
             positionClass: 'toast-top-right',
             preventDuplicates: true
         }),
         ProfabricComponentsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers,
+            runtimeChecks : {
+                strictStateImmutability: true,
+                strictActionImmutability: true,
+                strictActionSerializability: true,
+                strictStateSerializability:true
+            }
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        EffectsModule.forRoot([]),
+        EntityDataModule.forRoot({}),
+        StoreRouterConnectingModule.forRoot({
+            stateKey: 'router',
+            routerState: RouterState.Minimal
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]

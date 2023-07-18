@@ -1,6 +1,8 @@
 import { AppState } from '@/store/state';
 import { UiState } from '@/store/ui/state';
 import { Component, OnInit } from '@angular/core';
+import { TimeCalendarComponent } from '@components/time-calendar/time-calendar.component';
+import { TimeLineComponent } from '@components/time-line/time-line.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -16,6 +18,7 @@ export class WorkingTimeComponent implements OnInit {
   
   constructor(
       private store: Store<AppState>
+      
   ) {}
 
   ngOnInit(): void {
