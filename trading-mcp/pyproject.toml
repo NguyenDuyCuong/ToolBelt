@@ -1,0 +1,21 @@
+[project]
+name = "trading-mcp"
+version = "0.1.0"
+description = "Dữ liệu thị trường chứng khoán Việt Nam"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "anyio>=4.11.0",
+    "fastmcp>=2.13.0.2",
+    "vnstock>=3.2.6",
+]
+authors = [
+    { name = "CuongND", email = "cuongnd.ami@outlook.com" },
+]
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "mypy",
+    "flake8"
+]
