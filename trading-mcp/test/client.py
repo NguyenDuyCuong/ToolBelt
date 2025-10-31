@@ -1,9 +1,8 @@
 import asyncio
-from fastmcp import Client, FastMCP
-from fastmcp.client.transports import StdioTransport
+from fastmcp import Client
 from fastmcp.client.transports import StreamableHttpTransport
 
-server = FastMCP("server.py:main")
+
 # Basic connection
 transport = StreamableHttpTransport(url="http://127.0.0.1:8000/mcp")
 client = Client(transport)
