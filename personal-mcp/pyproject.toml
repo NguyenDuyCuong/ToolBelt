@@ -1,9 +1,19 @@
 [project]
-name = "mcp-server"
+name = "personal-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Personal MCP Server - Many tools"
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "mcp[cli]>=1.6.0",
+authors = [
+    { name = "Nguyễn Duy Cường", email = "cuongnd.ami@outlook.com" }
 ]
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.13.1",
+]
+
+[project.scripts]
+personal-mcp = "personal_mcp:main"
+
+[build-system]
+requires = ["uv_build>=0.9.5,<0.10.0"]
+build-backend = "uv_build"
