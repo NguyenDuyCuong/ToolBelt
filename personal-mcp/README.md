@@ -42,6 +42,22 @@ Personal MCP Server has many tools for AI Agent.
         }
     }
     ```
+- Test
+    ```bash
+    # Simply run pytest --inline-snapshot=fix,create to fill in the snapshot() with actual data.
+    pytest --inline-snapshot=fix,create
+    
+    # Run all tests
+    uv run pytest
+
+    # Run specific test file
+    uv run pytest tests/server/test_auth.py
+
+    # Run with coverage
+    uv run pytest --cov=fastmcp
+    ```
+
+
 
 ### Setup MCPs
 
