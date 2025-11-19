@@ -23,6 +23,26 @@ Personal MCP Server has many tools for AI Agent.
     ```bash
     > uvx --from . personal-mcp
     ```
+
+- Integrations
+    ```json
+    {
+        "mcpServers": {
+            "My Server": {
+            "command": "uv",
+            "args": [
+                "run",
+                "--with",
+                "fastmcp", 
+                "fastmcp",
+                "run",
+                "/absolute/path/to/server.py"
+            ]
+            }
+        }
+    }
+    ```
+
 ### Setup MCPs
 
 #### Serena
