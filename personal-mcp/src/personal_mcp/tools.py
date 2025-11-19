@@ -3,6 +3,7 @@ Register custom tools for the personal MCP server.
 """
 
 from datetime import datetime, timedelta
+import pandas as pd
 from fastmcp import Context
 from vnstock import Quote
 from vnstock.explorer.misc import sjc_gold_price
@@ -16,7 +17,7 @@ def register_tools(mcp):
     @mcp.tool
     async def get_sjc_gold_price(
         date: str | None = None, ctx: Context | None = None
-    ) -> str:
+    ) -> "pd.DataFrame | None | str":
         """
         Retrieves the SJC gold price for a given date.
 
@@ -25,20 +26,16 @@ def register_tools(mcp):
                   If None, uses the current date.
 
         Returns:
-            A string containing the SJC gold price data formatted as a table or error message.
+            pandas.DataFrame if data is available, None if not, or error string.
         """
         if ctx:
             await ctx.log(f"Fetching SJC gold price for date: {date or 'today'}")
 
         try:
             result = sjc_gold_price(date=date)
-
             if result is None or result.empty:
-                return "No data available for the specified date."
-
-            # Format the result as a readable string
-            result_str = result.to_string(index=False)
-            return f"SJC Gold Prices:\n{result_str}"
+                return None
+            return result
         except ValueError as ve:
             return f"Error: {str(ve)}"
         except OSError as ose:
@@ -53,7 +50,7 @@ def register_tools(mcp):
         end: str | None = None,
         interval: str = "1D",
         ctx: Context | None = None,
-    ) -> str:
+    ) -> "pd.DataFrame | None | str":
         """
         Retrieves historical OHLC (Open, High, Low, Close) data for a stock symbol.
 
@@ -66,7 +63,7 @@ def register_tools(mcp):
             interval: Data interval. Options: '1m', '5m', '15m', '30m', '1H', '1D' (default), '1W', '1M'.
 
         Returns:
-            A string containing the historical price data formatted as a table or error message.
+            pandas.DataFrame if data is available, None if not, or error string.
         """
         if ctx:
             await ctx.log(
@@ -90,11 +87,8 @@ def register_tools(mcp):
             result = quote.history(symbol=symbol, start=start, end=end, interval=interval)
 
             if result is None or result.empty:
-                return f"No data available for {symbol} in the specified date range."
-
-            # Format the result as a readable string
-            result_str = result.to_string(index=False)
-            return f"Quote History for {symbol} ({start} to {end}, interval: {interval}):\n{result_str}"
+                return None
+            return result
 
         except ValueError as ve:
             return f"Error: {str(ve)}"
