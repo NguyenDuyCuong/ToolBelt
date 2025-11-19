@@ -1,16 +1,16 @@
-import os
-import logging
+"""
+Main entry point for the Personal MCP server.
+"""
 
-def setup_logging():
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-    )
+import asyncio
+from personal_mcp.server import mcp
 
-def main():
-    setup_logging()
-    logging.info("Starting MCP server...")    
-    print("Hello from personal-mcp!!!")
+
+async def main():
+    """
+    Start the Personal MCP server asynchronously.
+    """
+    await mcp.run_async(transport="http", port=8000)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

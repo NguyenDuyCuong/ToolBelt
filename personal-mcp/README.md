@@ -13,6 +13,12 @@ Personal MCP Server has many tools for AI Agent.
     ```bash
     > uv run python -m personal_mcp.main
     ```
+
+- Run Dev
+    ```bash
+    > uv run fastmcp dev src/personal_mcp/server.py
+    ```
+
 - Run publish/cached package
     ```bash
     > uvx --from . personal-mcp

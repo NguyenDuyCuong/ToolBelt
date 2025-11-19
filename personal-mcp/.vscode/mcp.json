@@ -13,6 +13,14 @@
 				"--project",
 				"${workspaceFolder}"
 			]
+		},
+		"personal-mcp": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"python", "-m", "personal_mcp.main"
+			]
 		}
 	},
 	"inputs": []
