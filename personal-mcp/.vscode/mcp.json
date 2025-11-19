@@ -13,6 +13,36 @@
 				"--project",
 				"${workspaceFolder}"
 			]
+		},
+		"everything": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-everything"
+			]
+		},
+		"deepwiki": {
+			"url": "https://mcp.deepwiki.com/sse"
+		},
+		"chrome-devtools": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"chrome-devtools-mcp@latest"
+			]
+		},
+		"MCP_DOCKER": {
+			"command": "docker",
+			"args": [
+				"mcp",
+				"gateway",
+				"run"
+			],
+			"env": {
+				"LOCALAPPDATA": "C:\\Users\\cuong\\AppData\\Local",
+				"ProgramData": "C:\\ProgramData",
+				"ProgramFiles": "C:\\Program Files"
+			}
 		}
 	},
 	"inputs": []
