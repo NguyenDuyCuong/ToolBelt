@@ -2,5 +2,6 @@
 - Docstrings are used to document modules, functions, and methods.
 - Type hints are used for function arguments and return values.
 - The code is organized into modules for better maintainability.
+- Ưu tiên pure functions, immutability, và composability ở mọi nơi có thể.
 - `ruff` is the assumed tool for linting and formatting.
 - `pytest` is the assumed framework for testing.

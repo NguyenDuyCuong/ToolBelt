@@ -1,4 +1,5 @@
 - Python 3.13+
 - `fastmcp` for the MCP server
 - `pydantic` for data validation
+- `vnstock` 3.3.0 for retrival stock of vietnam market
 - `uv` for dependency management and running scripts

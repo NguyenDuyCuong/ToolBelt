@@ -71,33 +71,8 @@ Chỉ cần:
 - Viết thẳng interface + implementation
 - Test đơn giản
 
-### 5. Quy trình vnstock – phiên bản 2.0 (không còn single point of failure)
-
-#### 5.1. Lệnh tắt chính thức
-```bash
-@update-vnstock      → tự động cập nhật + lưu cache + commit docs/vnstock_latest.md
-@vnstock-docs        → hiển thị phiên bản hiện tại (ưu tiên memory → fallback file → thông báo lỗi)
-```
-
-#### 5.2. Quy trình tự động có fallback (không bao giờ block hoàn toàn)
-1. Kiểm tra @memory get vnstock_latest_docs_2025
-2. Nếu cache < 7 ngày tuổi → dùng luôn
-3. Nếu cache 7–30 ngày → dùng + hiển thị warning vàng
-4. Nếu không có cache hoặc > 30 ngày → gọi Context7 cập nhật
-5. Nếu Context7 lỗi → dùng file docs/vnstock_latest.md làm backup cuối cùng
-6. Chỉ từ chối hoàn toàn khi cả 3 nguồn đều chết (hiếm xảy ra)
-
-#### 5.3. Template hiển thị sau mỗi lần cập nhật thành công
-```markdown
-[vnstock 2.0] Phiên bản mới nhất: 0.3.7 (phát hành 18/11/2025) – Cache tươi (0 ngày)
-Nguồn: Context7 → Memory → docs/vnstock_latest.md
-
-| Hàm                    | Signature chính (2025)                                      | Ghi chú                  |
-|------------------------|-------------------------------------------------------------|--------------------------|
-| stock_historical_data  | (symbol: str, start_date: str, end_date: str, resolution: str = '1D', type: str = 'stock', source: str = 'TCBS') → pl.DataFrame | Khuyến khích dùng Polars |
-| listing_companies      | (offset: int = 0, limit: int = 100) → pl.DataFrame           | Tham số `page` đã xóa    |
-| financial_report      | (symbol: str, report_type: str, frequency: str, periods: int | None = None) → pl.DataFrame | frequency='Q' thay vì 'quarterly' |
-```
+### 5. Quy trình với thư viện vnstock – phiên bản 2.0 
+Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCP tools to resolve library id and get library docs without me having to explicitly ask.
 
 ### 6. Quy trình kiểm tra cấu trúc project bằng Serena – phiên bản 2.0
 ```bash
