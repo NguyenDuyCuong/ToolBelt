@@ -78,7 +78,9 @@ excluded_tools: []
 
 # initial prompt for the project. It will always be given to the LLM upon activating the project
 # (contrary to the memories, which are loaded on demand).
-initial_prompt: ""
+initial_prompt: "Cấu trúc project bắt buộc nằm ở GEMINI.md"
 
 project_name: "personal-mcp"
 included_optional_tools: []
+auto_memory: true
+auto_save_interval: 30

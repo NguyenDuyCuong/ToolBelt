@@ -1,0 +1,1 @@
+The project is a personal MCP (Multi-Context Prompt) server that provides a collection of tools for an AI Agent. It is built using Python and the `fastmcp` library.

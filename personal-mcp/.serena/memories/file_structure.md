@@ -1,0 +1,9 @@
+- `src/personal_mcp`: Main source code for the project.
+  - `main.py`: Entry point of the application.
+  - `server.py`: `fastmcp` server setup and custom routes.
+  - `tools.py`: Tool definitions for the MCP server.
+  - `prompts.py`: Prompt definitions for the MCP server.
+  - `middwares.py`: Middleware definitions for the MCP server.
+  - `config.py`: Configuration for the application.
+- `pyproject.toml`: Project metadata and dependencies.
+- `README.md`: Project documentation.

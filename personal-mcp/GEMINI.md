@@ -168,6 +168,161 @@ Khi được yêu cầu tạo tool mới hoặc refactor, luôn xuất ra theo t
 9. MCP registration code mẫu
 ```
 
+**BỔ SUNG CHÍNH THỨC VÀO HƯỚNG DẪN GEMINI AGENT**  
+(Hiệu lực ngay lập tức – Phiên bản 2.2 – 19/11/2025)
+
+Thêm mục **7** mới (bắt buộc thực thi 100% trước khi viết bất kỳ dòng code nào liên quan đến thư viện vnstock):
+
+### 7. Quy trình bắt buộc cập nhật tài liệu vnstock mới nhất bằng Context7  
+(Không bao giờ được dùng kiến thức vnstock cũ – kiến thức phải luôn là phiên bản mới nhất 2025)
+
+#### 7.1. Trước bất kỳ hành động nào sử dụng vnstock (viết code, refactor, trả lời câu hỏi), bạn PHẢI thực hiện đúng 5 bước sau (không được bỏ qua bất kỳ bước nào):
+
+```text
+Bước 1 – Thông báo bắt đầu cập nhật
+   → Luôn bắt đầu bằng câu chính xác:
+   "[Context7] Đang cập nhật tài liệu vnstock phiên bản mới nhất 2025…"
+
+Bước 2 – Gọi Context7 lấy document chính thức mới nhất (copy-paste nguyên văn query này)
+   @context7
+   Truy cập và đọc toàn bộ tài liệu chính thức mới nhất của thư viện vnstock tại:
+   • https://vnstock.site/docs/
+   • https://github.com/thinh-vu/vnstock
+   • https://vnstock.site/docs/changelog
+
+   Yêu cầu bắt buộc trả về:
+   1. Phiên bản hiện tại mới nhất (ví dụ: 0.3.7 hoặc 0.4.0-beta)
+   2. Ngày phát hành phiên bản mới nhất
+   3. Toàn bộ breaking changes từ 0.2.0 → hiện tại
+   4. Signature chính xác của các hàm chính:
+      - stock_historical_data
+      - listing_companies
+      - ticker_overview
+      - company_overview
+      - financial_report
+      - financial_flow
+      - index_sheet
+   5. Các tham số mới/deprecated/đổi tên
+   6. Tóm tắt thành bảng Markdown rõ ràng
+
+Bước 3 – Lưu vĩnh viễn vào Memory (bắt buộc)
+   @memory save vnstock_latest_docs_2025 <toàn bộ nội dung bảng + phiên bản + ngày cập nhật>
+
+Bước 4 – Kiểm tra độ tươi trước khi code
+   → Trước khi viết code, luôn hỏi:
+   @memory get vnstock_latest_docs_2025
+
+   Nếu ngày cập nhật < 3 ngày gần nhất → bắt buộc chạy lại bước 2.
+
+Bước 5 – Từ chối thực hiện nếu chưa có tài liệu mới nhất
+   Nếu vì bất kỳ lý do gì Context7 không lấy được → trả lời chính xác:
+   "Từ chối thực hiện: chưa có tài liệu vnstock phiên bản mới nhất 2025. Đang gọi Context7 cập nhật lại…"
+   → rồi mới tiếp tục sau khi cập nhật thành công.
+```
+
+#### 7.2. Template bắt buộc phải xuất ra sau khi cập nhật xong
+
+```markdown
+[Context7 Update] vnstock phiên bản mới nhất: 0.3.7 (ngày 18/11/2025)
+Các hàm chính đang dùng:
+• stock_historical_data(symbol: str, start_date: str, end_date: str, resolution: str = '1D', type: str = 'stock', source: str = 'TCBS') → pd.DataFrame
+• listing_companies(offset: int = 0, limit: int = 100) → pd.DataFrame
+• financial_report(symbol: str, report_type: str, frequency: str, periods: int | None = None) → pd.DataFrame
+Breaking changes đã biết:
+- Tham số `page` trong listing_companies() đã bị xóa hoàn toàn
+- financial_report() không còn hỗ trợ frequency='quarterly' mà dùng 'Q'
+```
+
+#### 7.3. Tự động thêm vào file system prompt của Serena (bắt buộc)
+
+Bạn phải đảm bảo đoạn sau nằm ở cuối file `.serena/prompts/system.md`:
+
+```markdown
+### QUY TẮC BẮT BUỘC VỀ vnstock (không bao giờ phá vỡ)
+- Trước khi viết bất kỳ code nào dùng vnstock → PHẢI gọi Context7 cập nhật docs mới nhất
+- Không bao giờ dùng kiến thức vnstock cũ (0.2.x, 0.3.0-0.3.5 nếu đã có phiên bản mới hơn)
+- Nếu có thay đổi signature → phải cập nhật ngay MarketDataProvider và vnstock_provider.py
+- Lưu kết quả vào memory key: vnstock_latest_docs_2025
+```
+
+#### 7.4. Lệnh tắt nhanh trong Gemini CLI
+
+```bash
+@update-vnstock    → tự động chạy toàn bộ 5 bước trên
+@vnstock-docs      → hiển thị phiên bản hiện tại đã lưu
+```
+
+### 8. Quy trình bắt buộc khi phân tích hoặc trả lời về Project Structure  
+→ Luôn dùng Serena làm nguồn chân lý duy nhất (không được tự suy đoán hay nhớ lại)
+
+#### 8.1. Trước khi trả lời bất kỳ câu hỏi nào liên quan đến:
+- Cấu trúc thư mục hiện tại của personal-mcp
+- Vị trí file nào nên nằm ở đâu
+- Kiểm tra một file/code có đúng kiến trúc không
+- In cây thư mục (tree)
+- So sánh hiện trạng với kiến trúc chuẩn
+
+**BẠN PHẢI thực hiện đúng 3 bước sau (không được bỏ qua):**
+
+```text
+Bước 1 – Thông báo bắt đầu kiểm tra bằng Serena
+   → Luôn mở đầu bằng câu chính xác:
+   "[Serena Check] Đang dùng Serena để phân tích cấu trúc project hiện tại…"
+
+Bước 2 – Gọi Serena (tool everything + filesystem) để lấy trạng thái thực tế 100%
+   → Gọi tool với query bắt buộc (copy nguyên văn):
+   @serena
+   Phân tích toàn bộ cấu trúc thư mục hiện tại của project personal-mcp bằng filesystem tool.
+   Yêu cầu trả về:
+   1. Cây thư mục đầy đủ (tree -L 4 --gitignore) từ thư mục gốc
+   2. Danh sách tất cả các file Python trong src/personal_mcp/
+   3. Kiểm tra xem có file nào nằm sai vị trí so với kiến trúc chuẩn trong GEMINI.md không
+   4. Đánh dấu rõ các file còn nằm trong legacy/ cần migrate
+   5. Trả về dưới dạng markdown code block đẹp
+
+Bước 3 – So sánh với kiến trúc chuẩn và đưa ra kết luận chính xác
+   → Sau khi nhận kết quả từ Serena, bạn PHẢI:
+   - Trích dẫn chính xác output của Serena
+   - Đối chiếu với cấu trúc mục 2 trong GEMINI.md
+   - Kết luận rõ ràng:
+     • "Cấu trúc hiện tại ĐÃ TUÂN THỦ 100% kiến trúc chuẩn"
+     • hoặc "Còn X file sai vị trí, cần migrate ngay: ..."
+     • hoặc "legacy/ vẫn còn Y file, mục tiêu đến 31/12/2025 phải trống hoàn toàn"
+```
+
+#### 8.2. Template bắt buộc phải xuất ra mỗi khi trả lời về structure
+
+```markdown
+[Serena Check] Đã phân tích project bằng Serena lúc 2025-11-19 23:59 ICT
+
+### Cây thư mục hiện tại (thực tế 100%)
+```bash
+personal-mcp/
+├── .serena/
+├── data/
+├── tests/
+└── src/
+    └── personal_mcp/
+        ├── domain/vietnam_equity/      # đúng
+        ├── application/vietnam_equity/ # đúng
+        ├── interfaces/mcp/stock_price_tool.py   # đúng
+        └── legacy/tools.py            # CẦN MIGRATE
+```
+
+### Kết luận kiến trúc
+- Tuân thủ: 92%
+- File còn sai vị trí / cần migrate: 3 file (xem legacy/)
+- MCP tools mới: 2/5 đã chuyển sang interfaces/mcp/ ✓
+- Đề xuất migrate tiếp theo: legacy/tools.py → interfaces/mcp/get_realtime_price.py
+```
+
+#### 8.3. Cấm tuyệt đối
+- Không được tự vẽ tree từ trí nhớ
+- Không được nói “theo tôi nhớ thì…” hoặc “cấu trúc hiện tại có vẻ là…”
+- Không được trả lời về structure nếu Serena chưa trả về kết quả
+
+**Chỉ được phép nói về project structure khi đã có xác nhận từ Serena.**
+
 Bạn không bao giờ được phép phá vỡ các nguyên tắc trên. Mọi đề xuất, code, kiến trúc đều phải thể hiện rõ sự tuân thủ Pure Function + SOLID + DDD + Functional Programming + Resource-constrained mindset.
 
 Bắt đầu ngay lập tức với vai trò này khi nhận bất kỳ yêu cầu nào liên quan đến Python hoặc MCP tools.

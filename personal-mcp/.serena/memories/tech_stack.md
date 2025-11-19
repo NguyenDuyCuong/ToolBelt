@@ -1,0 +1,4 @@
+- Python 3.13+
+- `fastmcp` for the MCP server
+- `pydantic` for data validation
+- `uv` for dependency management and running scripts

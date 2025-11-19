@@ -1,0 +1,6 @@
+- The project follows PEP 8 for code formatting.
+- Docstrings are used to document modules, functions, and methods.
+- Type hints are used for function arguments and return values.
+- The code is organized into modules for better maintainability.
+- `ruff` is the assumed tool for linting and formatting.
+- `pytest` is the assumed framework for testing.
