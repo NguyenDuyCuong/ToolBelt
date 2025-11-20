@@ -10,6 +10,7 @@ import logging
 # Import modules so their `@mcp.tool()` functions register on import.
 import company_tools  # noqa: F401
 import listing_tools  # noqa: F401
+import quote_tools  # noqa: F401
 
 from mcp_instance import mcp
 
