@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "Personal MCP Server": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "fastmcp",
+        "fastmcp",
+        "run",
+        "C:\\Users\\cuong\\workspace\\ToolBelt\\personal-mcp\\src\\personal_mcp\\server.py"
+      ]
+    }
+  }
+}

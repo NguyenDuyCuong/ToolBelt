@@ -1,5 +1,6 @@
 """Server setup for the Personal MCP application."""
 
+import asyncio
 from fastmcp import FastMCP
 from starlette.responses import PlainTextResponse
 
@@ -17,7 +18,19 @@ register_middwares(mcp)
 register_tools(mcp)
 register_prompts(mcp)
 
+
 @mcp.custom_route("/health", methods=["GET"])
 async def health_check() -> PlainTextResponse:
     """Health check endpoint."""
     return PlainTextResponse("OK")
+
+
+async def main():
+    """
+    Start the Personal MCP server asynchronously.
+    """
+    await mcp.run_async(transport="http")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
