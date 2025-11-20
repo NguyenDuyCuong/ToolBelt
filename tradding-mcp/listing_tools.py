@@ -4,8 +4,9 @@ Listing / exchange / industries related MCP tools (extracted from original `main
 import logging
 from typing import Literal
 
-from mcp_instance import mcp
 from vnstock.explorer.vci.listing import Listing as VCIListing
+from vnstock.explorer.msn.listing import Listing as MSNListing
+from mcp_instance import mcp
 
 
 @mcp.tool()
@@ -89,3 +90,54 @@ async def industries_icb(show_log: bool = False):
 
     listing = VCIListing()
     return listing.industries_icb(show_log=show_log)
+
+
+@mcp.tool()
+async def all_indices():
+    """
+    Truy xuất danh sách tất cả các chỉ số thị trường trên sàn chứng khoán Việt Nam.
+    Retrieve all market indices.
+
+    Tham số:        
+    """
+    logging.info("Processing all_indices request...")
+
+    listing = VCIListing()
+    return listing.all_indices()
+
+
+@mcp.tool()
+async def indices_by_group(group: Literal["HOSE Indices", "Sector Indices", "Investment Indices", "VNX Indices"] = "HOSE Indices"):
+    """
+    Lấy danh sách chỉ số theo nhóm tiêu chuẩn hóa.
+    Retrieve market indices by group.
+
+    Tham số:
+        - group (tùy chọn): Tên nhóm chỉ số. 
+            HOSE Indices: Các chỉ số chính của sàn HOSE (VN30, VN100, v.v.)
+            Sector Indices: Các chỉ số ngành (VNIT, VNIND, VNCONS, v.v.)
+            Investment Indices: Các chỉ số đầu tư (VNDIAMOND, VNFINLEAD, v.v.)
+            VNX Indices: Các chỉ số của sàn HNX (VNX50, VNXALL)
+    """
+    logging.info("Processing indices_by_group request...")
+
+    listing = VCIListing()
+    return listing.indices_by_group(group=group)
+
+
+@mcp.tool()
+async def search_symbol_id(query: str, locale: str = None, limit: int = 10, show_log: bool = False):
+    """
+    Truy xuất danh sách toàn bộ mã và tên các cổ phiếu từ thị trường.
+    Search for a stock symbol and return detailed information.
+
+    Tham số:
+        - query (bắt buộc): Từ khóa tìm kiếm mã cổ phiếu.
+        - locale (tùy chọn): Ngôn ngữ mục tiêu, đồng thời sử dụng để lọc kết quả, ví dụ 'vi-vn', 'en-us'. Mặc định là None.
+        - limit (tùy chọn): Giới hạn số kết quả. Mặc định là 10.
+        - show_log (tùy chọn): Hiển thị thông tin log giúp debug dễ dàng. Mặc định là False.
+    """
+    logging.info("Processing search_symbol_id request...")
+
+    listing = MSNListing()
+    return listing.search_symbol_id(query=query, locale=locale, limit=limit, show_log=show_log)
