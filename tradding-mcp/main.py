@@ -14,6 +14,7 @@ import quote_tools  # noqa: F401
 import trading_tools  # noqa: F401
 import fund_tools  # noqa: F401
 import gold_tools  # noqa: F401
+import finance_tools  # noqa: F401
 
 from mcp_instance import mcp
 
