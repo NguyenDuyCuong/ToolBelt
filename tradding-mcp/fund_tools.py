@@ -3,7 +3,6 @@ Fund-related tools for MCP.
 """
 
 import logging
-from typing import Literal
 
 from vnstock import Fund
 from mcp_instance import mcp
