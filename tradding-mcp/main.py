@@ -3,9 +3,12 @@ Truy xuất cổ phiếu thị trường Việt Nam.
 """
 
 import asyncio
+from typing import Literal
 import logging
 from mcp.server.fastmcp import FastMCP
-from vnstock import Listing, Company
+from vnstock import Listing
+from vnstock.explorer.tcbs.company import Company as TCBSCompany
+from vnstock.explorer.vci.company import Company as VCICompany
 
 # Initialize FastMCP server
 mcp = FastMCP("tradding-mcp")
@@ -21,7 +24,7 @@ async def overview(symbol: str):
     """
     logging.info("Processing overview request...")
 
-    company = Company(symbol=symbol, source="TCBS")
+    company = VCICompany(symbol=symbol)
     return company.overview()
 
 
@@ -36,12 +39,12 @@ async def shareholders(symbol: str):
     """
     logging.info("Processing shareholders request...")
 
-    company = Company(symbol=symbol, source="TCBS")
+    company = VCICompany(symbol=symbol)
     return company.shareholders()
 
 
 @mcp.tool()
-async def officers(symbol: str, filter_by: str = "all"):
+async def officers(symbol: str, filter_by: Literal['working', "all", 'resigned']= 'working'):
     """
     Truy xuất thông tin ban lãnh đạo của một cổ phiếu cụ thể trên thị trường Việt Nam.
     Retrieve company officers data. Supports kwargs like filter_by='working'|'resigned'|'all'.
@@ -55,8 +58,101 @@ async def officers(symbol: str, filter_by: str = "all"):
     """
     logging.info("Processing officers request...")
 
-    company = Company(symbol=symbol, source="TCBS")
+    company = VCICompany(symbol=symbol)
     return company.officers(filter_by=filter_by)
+
+
+@mcp.tool()
+async def subsidiaries(symbol: str, filter_by: Literal["all", "subsidiary", "affiliate"] = "all"):
+    """
+    Truy xuất thông tin công ty con của một cổ phiếu cụ thể trên thị trường Việt Nam.
+    Retrieve company subsidiaries data. Supports kwargs like filter_by='all'|'subsidiary'.
+
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin công ty con.
+        - filter_by (str): Lọc công ty con hoặc công ty liên kết.
+            'all': Lọc tất cả.
+            'subsidiary': Lọc công ty con.
+            'affiliate': Lọc công ty liên kết
+    """
+    logging.info("Processing subsidiaries request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.subsidiaries(filter_by=filter_by)
+
+
+@mcp.tool()
+async def events(symbol: str):
+    """
+    Truy xuất thông tin sự kiện của một cổ phiếu cụ thể trên thị trường Việt Nam.
+    Retrieve company events data.
+
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin sự kiện.
+    """
+    logging.info("Processing events request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.events()
+
+
+@mcp.tool()
+async def news(symbol: str):
+    """
+    Truy xuất tin tức liên quan đến công ty.
+    Retrieve company news data.
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin tin tức.
+    """
+    logging.info("Processing news request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.news()
+
+
+@mcp.tool()
+async def reports(symbol: str):
+    """
+    Truy xuất báo cáo phân tích về công ty.
+    Retrieve company financial reports data.
+
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin báo cáo tài chính.
+    """
+    logging.info("Processing reports request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.reports()
+
+
+@mcp.tool()
+async def ratio_summary(symbol: str):
+    """
+    Truy xuất tóm tắt các chỉ số tài chính quan trọng của công ty.
+    Retrieve company financial ratio summary data.
+
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin tóm tắt các chỉ số tài chính.
+    """
+    logging.info("Processing ratio_summary request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.ratio_summary()
+
+
+@mcp.tool()
+async def trading_stats(symbol: str):
+    """
+    Truy xuất thống kê giao dịch của công ty.
+    Retrieve company trading statistics data.
+
+    Tham số:
+        - symbol: Mã cổ phiếu cần truy xuất thông tin thống kê giao dịch.
+    """
+    logging.info("Processing trading_stats request...")
+
+    company = VCICompany(symbol=symbol)
+    return company.trading_stats()
 
 
 @mcp.tool()
