@@ -11,6 +11,7 @@ import logging
 import company_tools  # noqa: F401
 import listing_tools  # noqa: F401
 import quote_tools  # noqa: F401
+import trading_tools  # noqa: F401
 
 from mcp_instance import mcp
 
